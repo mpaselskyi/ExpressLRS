@@ -30,7 +30,7 @@ class UploadMethod(Enum):
     def __str__(self):
         return self.value
 
-def upload_wifi(args, options, upload_addr, isstm: bool):
+def upload_wifi(args, options, upload_addr):
     wifi_mode = 'upload'
     if args.force == True:
         wifi_mode = 'uploadforce'
@@ -39,9 +39,9 @@ def upload_wifi(args, options, upload_addr, isstm: bool):
     if args.port:
         upload_addr = [args.port]
     if options.mcuType == MCUType.ESP8266:
-        return upload_via_esp8266_backpack.do_upload('firmware.bin.gz', wifi_mode, upload_addr, isstm, {})
+        return upload_via_esp8266_backpack.do_upload('firmware.bin.gz', wifi_mode, upload_addr,{})
     else:
-        return upload_via_esp8266_backpack.do_upload(args.file.name, wifi_mode, upload_addr, isstm, {})
+        return upload_via_esp8266_backpack.do_upload(args.file.name, wifi_mode, upload_addr, {})
 
 def upload_esp8266_uart(args):
     if args.port == None:
